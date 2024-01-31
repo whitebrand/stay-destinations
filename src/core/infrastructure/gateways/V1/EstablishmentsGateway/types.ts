@@ -1,5 +1,7 @@
 import { TranslatableName, Coordinates } from '../types';
 
+type DestinationId = number;
+
 type DestinationData = {
   translatableName: TranslatableName;
   photographs: string[];
@@ -7,10 +9,10 @@ type DestinationData = {
 };
 
 export type Destination = {
-  id: string;
+  id: DestinationId;
   childs?: Destination[];
   destinationData: DestinationData;
-  fatherDestination?: string;
+  fatherDestination?: DestinationId;
   isTop: boolean;
   isFinalNode: boolean;
   numEstablishments: number;

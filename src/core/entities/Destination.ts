@@ -1,5 +1,7 @@
+type DestinationId = number;
+
 export type DestinationEntity = {
-  id: string;
+  id: DestinationId;
   name: string;
   isFeatured: boolean;
   isLastOne: boolean;
