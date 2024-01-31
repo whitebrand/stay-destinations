@@ -12,7 +12,10 @@
     "package:lint": "eslint ."
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.18.0",
+    "axios": "^1.6.7",
     "react": "18.2.0",
+    "react-native": "0.73.3",
     "react-native-dotenv": "^3.4.9"
   },
   "devDependencies": {
