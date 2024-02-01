@@ -1,7 +1,7 @@
 import HttpInstance from '../../../instances/HttpInstance';
 import { Response } from '../types';
 import { DestinationEntity } from '../../../../entities/Destination';
-import { mapDestination } from './mappers';
+import { mapDestinationsList } from './mappers';
 import { Destination } from './types';
 
 type GetDestinationsResponse = Response<Destination[]>;
@@ -21,7 +21,7 @@ type GetDestinationsResponse = Response<Destination[]>;
 
 const getDestinations = async (): Promise<DestinationEntity[]> => 
   HttpInstance.get<GetDestinationsResponse>('/v1/establishments/destinations')
-    .then(({ data }) => data.data.map(mapDestination));
+    .then(({ data }) => mapDestinationsList(data.data));
     // TODO: map the error and handle it
 
 export default {

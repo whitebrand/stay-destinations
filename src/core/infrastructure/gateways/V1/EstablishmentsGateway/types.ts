@@ -1,6 +1,6 @@
 import { TranslatableName, Coordinates } from '../types';
 
-type DestinationId = number;
+export type DestinationId = number;
 
 type DestinationData = {
   translatableName: TranslatableName;
