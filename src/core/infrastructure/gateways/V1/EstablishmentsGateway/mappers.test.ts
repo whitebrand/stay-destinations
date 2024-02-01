@@ -13,7 +13,7 @@ describe('EstablishmentsGateway mappers', () => {
       const output = mapDestination(DESTINATION_FIXTURE);
   
       expect(output).toEqual({
-        id: DESTINATION_FIXTURE.id,
+        id: `${DESTINATION_FIXTURE.id}`,
         name: DESTINATION_FIXTURE.destinationData.translatableName.es,
         isFeatured: DESTINATION_FIXTURE.isTop,
         hasChildren: !DESTINATION_FIXTURE.isFinalNode,

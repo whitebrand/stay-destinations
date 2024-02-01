@@ -1,4 +1,4 @@
-export type DestinationId = number;
+export type DestinationId = string;
 
 export type DestinationEntity = {
   id: DestinationId;

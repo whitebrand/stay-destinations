@@ -7,7 +7,7 @@ import { Destination } from './types';
 export const mapDestinationsList: Mapper<Destination[], DestinationEntity[]> = input => input.map(mapDestination);
 
 export const mapDestination: Mapper<Destination, DestinationEntity> = input => ({
-  id: input.id,
+  id: input.id.toString(),
   name: getTranslatableName(input.destinationData.translatableName),
   isFeatured: input.isTop,
   hasChildren: !input.isFinalNode,
