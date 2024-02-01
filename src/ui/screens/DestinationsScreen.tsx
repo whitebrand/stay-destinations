@@ -9,10 +9,11 @@ const DestinationsScreen = () => {
   const { isLoading, data } = useDestinationsList();
   const hasDestinations = data && data.length > 0;
 
-  const mapDestinationEntityToTreeItemData = ({ id, name, childs }: DestinationEntity): TreeItemData => ({
+  const mapDestinationEntityToTreeItemData = ({ id, name, isFeatured, childs }: DestinationEntity): TreeItemData => ({
     id,
     title: name,
     childs: childs.map(mapDestinationEntityToTreeItemData),
+    isFeatured,
   });
 
   const destinations = useMemo(() => {
