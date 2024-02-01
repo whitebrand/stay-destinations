@@ -1,8 +1,9 @@
 import HttpInstance from '../../../instances/HttpInstance';
 import { Response } from '../types';
-import { DestinationEntity } from '../../../../entities/Destination';
+import { DestinationEntity, DestinationId } from '../../../../entities/Destination';
 import { mapDestinationsList } from './mappers';
 import { Destination } from './types';
+import { flattenTreeArray } from '../../../../../utils/helpers';
 
 type GetDestinationsResponse = Response<Destination[]>;
 
@@ -24,6 +25,28 @@ const getDestinations = async (): Promise<DestinationEntity[]> =>
     .then(({ data }) => mapDestinationsList(data.data));
     // TODO: map the error and handle it
 
+type GetDestinationProps = {
+  id: DestinationId;
+}
+
+const getDestination = async ({ id }: GetDestinationProps): Promise<DestinationEntity> =>
+  // NOTE: This is a workaround that simulates a resource search. 
+  // In hexagonal architecture a resource is fetch by a specific resource path.
+  // Example: /v1/destinations/{destinationId}
+  getDestinations()
+    .then(destinations => flattenTreeArray(destinations, 'childs'))
+    .then(destinations => {
+      const found = destinations.find(destination => destination.id === id);
+
+      if (!found) {
+        throw new Error('Destination not found');
+      }
+
+      return found;
+    });
+
+
 export default {
   getDestinations,
+  getDestination,
 };
