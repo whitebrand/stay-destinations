@@ -5,7 +5,7 @@ type ScreenProps = PropsWithChildren<{}>;
 
 const Screen: React.FC<ScreenProps> = ({ children }) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       {children}
     </SafeAreaView>
   );

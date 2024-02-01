@@ -7,3 +7,17 @@ export const toggleArrayItem = <T>(array: T[], item: T): T[] => {
     return [...array, item];
   }
 };
+
+export const flattenTreeArray = <T>(array: T[], childsKey: keyof T): T[] => {
+  let output: T[] = [];
+
+  array.forEach(item => {
+    output.push(item);
+
+    if (item[childsKey] && Array.isArray(item[childsKey])) {
+      output = output.concat(flattenTreeArray(item[childsKey] as T[], childsKey));
+    }
+  });
+
+  return output;
+}

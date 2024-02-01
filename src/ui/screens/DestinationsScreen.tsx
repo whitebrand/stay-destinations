@@ -1,11 +1,15 @@
 import React, { useMemo } from 'react';
 import { Text } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Screen from '../components/Screen';
 import TreeList, { TreeItemData } from '../components/TreeList';
 import useDestinationsList from '../../core/usecases/useDestinationsList';
 import { DestinationEntity } from '../../core/entities/Destination';
+import { RootStackParamList } from '../../Router';
 
-const DestinationsScreen = () => {
+type DestinationsScreenProps = NativeStackScreenProps<RootStackParamList, 'Destinations'>;
+
+const DestinationsScreen: React.FC<DestinationsScreenProps> = ({ navigation }) => {
   const { isLoading, data } = useDestinationsList();
   const hasDestinations = data && data.length > 0;
 
@@ -21,7 +25,7 @@ const DestinationsScreen = () => {
   }, [data]);
 
   const handleGoToDestination = (id: string) => {
-
+    navigation.navigate('DestinationDetails', { destinationId: id });
   };
 
   return (
