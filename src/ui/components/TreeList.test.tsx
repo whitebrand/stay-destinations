@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, within } from '@testing-library/react-native';
 import TreeList, { TreeItemData } from './TreeList';
 
 const ON_OPEN = jest.fn();
@@ -13,18 +13,22 @@ const FAKE_TREE_ITEM_DATA: TreeItemData[] = [
         id: '11',
         title: 'Item 1.1',
         childs: [],
+        isFeatured: false,
       },
       {
         id: '12',
         title: 'Item 1.2',
         childs: [],
+        isFeatured: false,
       },
     ],
+    isFeatured: false,
   },
   {
     id: '2',
     title: 'Item 2',
     childs: [],
+    isFeatured: true,
   },
 ];
 
@@ -71,5 +75,14 @@ describe('<TreeList /> component', () => {
     expect(queryByText('Item 1.1')).not.toBeNull();
     expect(queryByText('Item 1.2')).not.toBeNull();
     expect(ON_OPEN).not.toHaveBeenCalled();
+  });
+
+  it('shows featured tag when item has featured enabled', () => {
+    const { queryByTestId } = renderElement();
+    const itemContainer = queryByTestId('item-2');
+    const featuredTag = within(itemContainer!).queryByTestId('tag');
+
+    expect(featuredTag).not.toBeNull();
+    expect(within(featuredTag!).queryByText('featured')).not.toBeNull();
   });
 });

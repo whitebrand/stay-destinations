@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { View, FlatList, ListRenderItem, Text, TouchableOpacity, ViewStyle } from 'react-native';
+import Tag from './Tag';
 import { toggleArrayItem } from '../../utils/helpers';
+import styles from './TreeList.styles';
 
 export type TreeItemData = {
   id: string;
   title: string;
   childs: TreeItemData[];
+  isFeatured: boolean;
 };
 
 type TreeListProps = {
@@ -34,10 +37,11 @@ const TreeList: React.FC<TreeListProps> = ({ items, style, onOpen }) => {
     };
   
     return (
-      <View style={style}>
+      <View style={style} testID={`item-${item.id}`}>
         <TouchableOpacity onPress={handlePress}>
-          <View style={{ borderWidth: 1, borderRadius: 6, margin: 8, padding: 16, borderColor: '#DDD' }}>
-            <Text style={{ fontSize: 16 }}>{item.title}</Text>
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemTitle}>{item.title}</Text>
+            { item.isFeatured && <Tag title="featured" style={{ marginLeft: 4 }} /> }
           </View>
         </TouchableOpacity>
         { hasChildItems && !isCollapsed && (
