@@ -5,7 +5,7 @@ import QueryHookWrapper from '../../utils/test/QueryHookWrapper';
 
 describe('useDestinationsList hook', () => {
   it('calls the getDestinations gateway method', async () => {
-    const FAKE_GET_DESTINATIONS_RESPONSE = [{ id: 1, name: 'example', isFeatured: false, isLastOne: false }];
+    const FAKE_GET_DESTINATIONS_RESPONSE = [{ id: 1, name: 'example', isFeatured: false, hasChildren: false }];
     const mockGetDestinations = jest.fn();
     
     jest.spyOn(DestinationsGateway, 'getDestinations').mockImplementation(mockGetDestinations).mockResolvedValue(FAKE_GET_DESTINATIONS_RESPONSE);
